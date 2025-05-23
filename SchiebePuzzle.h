@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
+using namespace std;
 
 class SchiebePuzzle {
 private:
@@ -11,7 +12,9 @@ private:
 public:
     explicit SchiebePuzzle(const std::vector<std::string> &eingabe);
 
-    static std::pair<int, int> leeresFeld (const std::vector<std::vector<int>> &puzzle);
+    [[nodiscard]] bool istLösbar () const;
 
-    static std::vector<std::vector<std::vector<int>>> getNeighbors(const std::vector<std::vector<int>> &puzzle);
+    [[nodiscard]] std::pair<int, int> leeresFeld () const;
+
+    std::vector<std::vector<std::vector<int>>> getNeighbors();
 };

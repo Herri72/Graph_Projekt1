@@ -1,7 +1,5 @@
-//
-// Created by Henri on 23.05.2025.
-//
-
+#pragma once
+#include "SchiebePuzzle.h"
 #include<queue>
 #include<vector>
 #include<map>
@@ -9,9 +7,7 @@
 using namespace std;
 
 class Breitensuche {
-bool breitensuche(int i);
-    queue<int>;
-
+    static std::string Suche (const SchiebePuzzle &puzzle);
 };
 
 
