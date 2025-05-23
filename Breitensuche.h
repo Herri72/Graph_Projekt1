@@ -6,8 +6,11 @@
 #include<vector>
 #include<map>
 #include<algorithm>
+using namespace std;
 
 class Breitensuche {
+bool breitensuche(int i);
+    queue<int>;
 
 };
 

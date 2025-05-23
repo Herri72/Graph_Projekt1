@@ -14,10 +14,3 @@ int main(int argc, char** argv) {
 
 
     //extend this code
-}
-
-bool bfs(int i){
-
-
-    return false;
-}
