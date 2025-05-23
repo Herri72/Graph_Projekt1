@@ -1,0 +1,3 @@
+C:/Users/Henri/Documents/Kombinatorische_Optimierung/Graph_Projekt1/cmake-build-debug/CMakeFiles/Projekt1.dir
+C:/Users/Henri/Documents/Kombinatorische_Optimierung/Graph_Projekt1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Henri/Documents/Kombinatorische_Optimierung/Graph_Projekt1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
