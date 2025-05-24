@@ -8,9 +8,12 @@ using namespace std; // wuerde ich empfehlen zu benutzen, diese Zeile kann aber 
 int main(int argc, char** argv) {
 
 
-
     vector<string> input_vector = input_to_vector(argc, argv); // the input given in console is now in input_vector
     // (e.g. for input "hallo 1 a b" input_vector is {"hallo", "1", "a", "b"})
-
+    string start;
+    for (const string &token: input_vector)
+        start += token;
+    std::cout << start;
 
     //extend this code
+}
