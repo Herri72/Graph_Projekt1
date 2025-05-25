@@ -1,6 +1,6 @@
 #include "parameter_reader.h"
 #include <iostream>
-
+#include "Breitensuche.h"
 
 using namespace std; // wuerde ich empfehlen zu benutzen, diese Zeile kann aber auch geloescht werden
 // Nach dem Loeschen dieser Zeile muss unten dann allerdings std::vector<std::string> geschrieben werden!
@@ -13,7 +13,13 @@ int main(int argc, char** argv) {
     string start;
     for (const string &token: input_vector)
         start += token;
-    std::cout << start;
+    cout<<start;
 
-    //extend this code
+    SchiebePuzzle puzzle_instanz(input_vector);
+    std::string loesung = Breitensuche::Suche(puzzle_instanz);
+
+    std::cout << loesung << std::endl;
+
+    return 0;
+
 }
