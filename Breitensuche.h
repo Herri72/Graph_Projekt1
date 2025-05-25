@@ -7,7 +7,9 @@
 using namespace std;
 
 class Breitensuche {
+public:
     static std::string Suche (const SchiebePuzzle &puzzle);
+
 };
 
 
