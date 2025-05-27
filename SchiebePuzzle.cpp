@@ -1,6 +1,7 @@
 #include "SchiebePuzzle.h"
 
 SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
+    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 0));
     // Eingabe Parameter durchlaufen
     for (int i = 0; i < eingabe.size(); ++i) {
         // Wenn es eine Zahl ist, im Vector an passender Stelle einfügen
@@ -15,6 +16,12 @@ SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
             std::cout << "Fehler: Ungültige Eingabe!" << std::endl;
         }
     }
+}
+
+SchiebePuzzle::SchiebePuzzle() = default;
+
+SchiebePuzzle::SchiebePuzzle(const SchiebePuzzle &other) {
+    matrix = other.matrix;
 }
 
 bool SchiebePuzzle::istLösbar() const{
@@ -53,37 +60,39 @@ std::pair<int, int> SchiebePuzzle::leeresFeld() const {
     return {-1, -1};
 }
 
-std::vector<std::vector<std::vector<int>>> SchiebePuzzle::getNeighbors() {
-    int zeile = leeresFeld().first;
-    int spalte = leeresFeld().second;
-    std::vector<std::vector<std::vector<int>>> neighbors;
+void SchiebePuzzle::Swap(const int &zeile, const int &spalte, const int &otherZeile, const int &otherSpalte) {
+    int akt = this->matrix[zeile][spalte];
+    this->matrix[zeile][spalte] = this->matrix[otherZeile][otherSpalte];
+    this->matrix[otherZeile][otherSpalte] = akt;
+}
+
+std::vector<SchiebePuzzle> SchiebePuzzle::getNeighbors(const SchiebePuzzle &puzzle) {
+    const int zeile = puzzle.leeresFeld().first;
+    const int spalte = puzzle.leeresFeld().second;
+    std::vector<SchiebePuzzle> neighbors;
 
     // lLinksverschiebung möglich
     if (zeile >= 1) {
-        std::vector<std::vector<int>> neighbour = matrix;
-        neighbour [zeile] [spalte] = matrix [zeile - 1] [spalte];
-        neighbour [zeile - 1] [spalte] = matrix [zeile] [spalte];
+        SchiebePuzzle neighbour = puzzle;
+        neighbour.Swap(zeile, spalte, zeile - 1, spalte);
         neighbors.push_back(neighbour);
     }
     // Rechtsverschiebung möglich
     if (zeile <= 1) {
-        std::vector<std::vector<int>> neighbour = matrix;
-        neighbour [zeile] [spalte] = matrix [zeile + 1] [spalte];
-        neighbour [zeile + 1] [spalte] = matrix [zeile] [spalte];
+        SchiebePuzzle neighbour = puzzle;
+        neighbour.Swap(zeile, spalte, zeile + 1, spalte);
         neighbors.push_back(neighbour);
     }
     // Nach oben Verschieben möglich
     if (spalte >= 1) {
-        std::vector<std::vector<int>> neighbour = matrix;
-        neighbour [zeile] [spalte] = matrix [zeile] [spalte - 1];
-        neighbour [zeile] [spalte - 1] = matrix [zeile] [spalte];
+        SchiebePuzzle neighbour = puzzle;
+        neighbour.Swap(zeile, spalte, zeile, spalte - 1);
         neighbors.push_back(neighbour);
     }
     // Nach unten Verschieben möglich
     if (spalte <= 1) {
-        std::vector<std::vector<int>> neighbour = matrix;
-        neighbour [zeile] [spalte] = matrix [zeile] [spalte + 1];
-        neighbour [zeile] [spalte + 1] = matrix [zeile] [spalte];
+        SchiebePuzzle neighbour = puzzle;
+        neighbour.Swap(zeile, spalte, zeile, spalte + 1);
         neighbors.push_back(neighbour);
     }
     return neighbors;

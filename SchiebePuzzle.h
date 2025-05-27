@@ -12,9 +12,15 @@ private:
 public:
     explicit SchiebePuzzle(const std::vector<std::string> &eingabe);
 
+    SchiebePuzzle ();
+
+    SchiebePuzzle (const SchiebePuzzle &other);
+
     [[nodiscard]] bool istLösbar () const;
 
     [[nodiscard]] std::pair<int, int> leeresFeld () const;
 
-    std::vector<std::vector<std::vector<int>>> getNeighbors();
+    void Swap (const int &zeile, const int &spalte, const int &otherZeile, const int &otherSpalte);
+
+    static std::vector<SchiebePuzzle> getNeighbors(const SchiebePuzzle &puzzle);
 };
