@@ -17,6 +17,14 @@ SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
         }
     }
 }
+SchiebePuzzle::SchiebePuzzle(const std::vector<std::vector<int>> &initial_matrix) : matrix(initial_matrix) {
+    // Basic validation, can be expanded
+    if (matrix.size() != 3 || (!matrix.empty() && matrix[0].size() != 3)) {
+        // std::cerr << "Error: SchiebePuzzle constructed with invalid matrix dimensions." << std::endl;
+        // Potentially throw an exception or set to a defined error state
+        matrix.assign(3, std::vector<int>(3,0)); // Fallback to a default empty matrix
+    }
+}
 
 SchiebePuzzle::SchiebePuzzle() = default;
 
@@ -97,4 +105,21 @@ std::vector<SchiebePuzzle> SchiebePuzzle::getNeighbors(const SchiebePuzzle &puzz
     }
     return neighbors;
 }
+std::string SchiebePuzzle::toString() const {
+    std::string s = "";
+    s.reserve(9); // Reserve space for 9 characters
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (matrix[i][j] == 0) {
+                s += 'e';
+            } else {
+                s += std::to_string(matrix[i][j]);
+            }
+        }
+    }
+    return s;
+}
 
+const std::vector<std::vector<int>>& SchiebePuzzle::getMatrix() const {
+    return matrix;
+}
