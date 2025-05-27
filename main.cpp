@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     string start;
     for (const string &token: input_vector)
         start += token;
-    cout<<start;
+    cout<<"start" <<start << "\n";
 
     SchiebePuzzle puzzle_instanz(input_vector);
     std::string loesung = Breitensuche::Suche(puzzle_instanz);

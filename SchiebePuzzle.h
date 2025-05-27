@@ -27,5 +27,7 @@ public:
 
     void Swap (const int &zeile, const int &spalte, const int &otherZeile, const int &otherSpalte);
 
-    static std::vector<SchiebePuzzle> getNeighbors(const SchiebePuzzle &puzzle);
+    [[nodiscard]] std::vector<SchiebePuzzle> getNeighbors() const;
+
+    string toString () const;
 };

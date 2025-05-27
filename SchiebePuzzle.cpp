@@ -15,7 +15,7 @@ bool SchiebePuzzle::operator==(const SchiebePuzzle &other) const {
 }
 
 SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
-    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 0));
+    matrix = std::vector<std::vector<int>>(3, std::vector<int>(3, 0));
     // Eingabe Parameter durchlaufen
     for (int i = 0; i < eingabe.size(); ++i) {
         // Wenn es eine Zahl ist, im Vector an passender Stelle einfügen
@@ -30,6 +30,7 @@ SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
             std::cout << "Fehler: Ungültige Eingabe!" << std::endl;
         }
     }
+    //cout << "nach einlesen" << this->toString() << " " << this->matrix [0] [0];
 }
 
 SchiebePuzzle::SchiebePuzzle() = default;
@@ -70,7 +71,9 @@ std::pair<int, int> SchiebePuzzle::leeresFeld() const {
         }
     }
     // Fehler, falls kein leeres Feld gefunden werden sollte
+    cout << this->toString() << matrix [0] [0];
     std::cout << "Keine Null!" << std::endl;
+    cout << this->toString();
     return {-1, -1};
 }
 
@@ -80,34 +83,49 @@ void SchiebePuzzle::Swap(const int &zeile, const int &spalte, const int &otherZe
     this->matrix[otherZeile][otherSpalte] = akt;
 }
 
-std::vector<SchiebePuzzle> SchiebePuzzle::getNeighbors(const SchiebePuzzle &puzzle) {
-    const int zeile = puzzle.leeresFeld().first;
-    const int spalte = puzzle.leeresFeld().second;
+std::vector<SchiebePuzzle> SchiebePuzzle::getNeighbors() const {
+    const int zeile = this->leeresFeld().first;
+    const int spalte = this->leeresFeld().second;
     std::vector<SchiebePuzzle> neighbors;
 
     // lLinksverschiebung möglich
     if (zeile >= 1) {
-        SchiebePuzzle neighbour = puzzle;
+        SchiebePuzzle neighbour (*this);
         neighbour.Swap(zeile, spalte, zeile - 1, spalte);
         neighbors.push_back(neighbour);
     }
     // Rechtsverschiebung möglich
     if (zeile <= 1) {
-        SchiebePuzzle neighbour = puzzle;
+        SchiebePuzzle neighbour (*this);
         neighbour.Swap(zeile, spalte, zeile + 1, spalte);
         neighbors.push_back(neighbour);
     }
     // Nach oben Verschieben möglich
     if (spalte >= 1) {
-        SchiebePuzzle neighbour = puzzle;
+        SchiebePuzzle neighbour (*this);
         neighbour.Swap(zeile, spalte, zeile, spalte - 1);
         neighbors.push_back(neighbour);
     }
     // Nach unten Verschieben möglich
     if (spalte <= 1) {
-        SchiebePuzzle neighbour = puzzle;
+        SchiebePuzzle neighbour (*this);
         neighbour.Swap(zeile, spalte, zeile, spalte + 1);
         neighbors.push_back(neighbour);
     }
     return neighbors;
+}
+
+std::string SchiebePuzzle::toString() const {
+    string stringpuzzle;
+    for (int i = 0; i < this->matrix.size(); ++i) {
+        for (int j = 0; j < this->matrix [i].size(); ++j) {
+            if (this->matrix [i] [j] == 0){
+                stringpuzzle += "e ";
+            }
+            else {
+                stringpuzzle += to_string(this->matrix[i][j]) + " ";
+            }
+        }
+    }
+    return stringpuzzle;
 }
