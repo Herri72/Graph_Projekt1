@@ -1,5 +1,19 @@
 #include "SchiebePuzzle.h"
 
+bool SchiebePuzzle::operator==(const SchiebePuzzle &other) const {
+    if (this->matrix.size() != other.matrix.size()) {
+        return false;
+    }
+    for (int i = 0; i < other.matrix.size(); ++i) {
+        for (int j = 0; j < other.matrix [i].size(); ++j) {
+            if (this->matrix[i][j] != other.matrix[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 SchiebePuzzle::SchiebePuzzle(const std::vector<std::string> &eingabe) {
     std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 0));
     // Eingabe Parameter durchlaufen

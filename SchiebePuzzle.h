@@ -1,4 +1,5 @@
 #pragma once
+#include <utility>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -10,11 +11,15 @@ private:
     std::vector<std::vector<int>> matrix;
 
 public:
+    bool operator == (const SchiebePuzzle& other) const;
+
     explicit SchiebePuzzle(const std::vector<std::string> &eingabe);
 
     SchiebePuzzle ();
 
     SchiebePuzzle (const SchiebePuzzle &other);
+
+    explicit SchiebePuzzle (std::vector<std::vector<int>> eingabe): matrix(std::move(eingabe)) {};
 
     [[nodiscard]] bool istLösbar () const;
 

@@ -9,16 +9,16 @@ std::string Breitensuche::Suche(const SchiebePuzzle &puzzle) {
     // Queue die den vorherigen Zustand und den aktuellen Zustand des Schiebepuzzles speichert
     queue<pair <SchiebePuzzle, SchiebePuzzle>> zustände;
 
-    const std::string ziel_zustand_str = "12345678e";
-    std::queue<std::pair<SchiebePuzzle, std::string>> q;
-    std::set<std::string> besucht;
-    std::string start_zustand_str = puzzle.toString();
+    const std::vector<std::vector<int>> final_matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
+    const SchiebePuzzle ziel_zustand = SchiebePuzzle (final_matrix);
+    std::queue<std::pair<SchiebePuzzle, SchiebePuzzle>> queue;
+    std::map<std::string, int> besucht;
 
-    if (start_zustand_str == ziel_zustand_str) {
-        return "";
+    if (puzzle == ziel_zustand) {
+        return "\n";
     }
 
-    q.push({puzzle, ""});
+    queue.push({puzzle, puzzle});
     besucht.insert(start_zustand_str);
 
     const std::vector<std::tuple<int, int, char>> moves = {
