@@ -45,6 +45,9 @@ bool SchiebePuzzle::istLösbar() const{
     for (const auto& row : matrix) {
         std::copy(row.begin(), row.end(), std::back_inserter(eindimensional));
     }
+    eindimensional.erase(
+    std::remove(eindimensional.begin(), eindimensional.end(), 0),
+    eindimensional.end());
 
     // zählt wie häufig ein größer nummeriertes Puzzleteil vor einem kleiner nummerierten Puzzleteil steht (in 1d sicht gedacht)
     // dies ist als Inversion bezeichnet
@@ -128,4 +131,12 @@ std::string SchiebePuzzle::toString() const {
         }
     }
     return stringpuzzle;
+}
+
+vector<int> SchiebePuzzle::toVector() const {
+    std::vector<int> flat;
+    for (const auto& row : matrix) {
+        flat.insert(flat.end(), row.begin(), row.end());
+    }
+    return flat;
 }

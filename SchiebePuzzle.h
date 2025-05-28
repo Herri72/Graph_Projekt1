@@ -30,4 +30,6 @@ public:
     [[nodiscard]] std::vector<SchiebePuzzle> getNeighbors() const;
 
     string toString () const;
+
+    vector<int> toVector () const;
 };
