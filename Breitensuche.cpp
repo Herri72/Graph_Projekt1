@@ -24,12 +24,13 @@ std::string Breitensuche::Suche(const SchiebePuzzle &puzzle) {
     while (!queue.empty()) {
         SchiebePuzzle aktuellesPuzzle = queue.front().second;
         vector <SchiebePuzzle> aktuellerPfad = queue.front().first;
+        queue.pop();
 
         vector <SchiebePuzzle> neighbours = aktuellesPuzzle.getNeighbors();
         for (int i = 0; i < neighbours.size(); ++i) {
-            vector <SchiebePuzzle> newPath = aktuellerPfad;
-            newPath.push_back(neighbours [i]);
             if (neighbours [i] == ziel_zustand) {
+                vector <SchiebePuzzle> newPath = aktuellerPfad;
+                newPath.push_back(neighbours [i]);
                 cout << "Solution found\n";
                 for (const auto & j : newPath) {
                     cout << j.toString() << "\n";
@@ -37,8 +38,14 @@ std::string Breitensuche::Suche(const SchiebePuzzle &puzzle) {
                 return "";
             }
             if (!visited.contains(neighbours[i].toVector())){
-                queue.push({newPath, neighbours [i]});
+                cout << "Test11666667777777\n";
+                vector <SchiebePuzzle> newPath = aktuellerPfad;
+                newPath.push_back(neighbours [i]);
+                queue.emplace(newPath, neighbours [i]);
                 visited.emplace(neighbours [i].toVector(), 0);
+            }
+            else {
+                cout << "Test1\n";
             }
         }
     }
