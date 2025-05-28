@@ -38,14 +38,10 @@ std::string Breitensuche::Suche(const SchiebePuzzle &puzzle) {
                 return "";
             }
             if (!visited.contains(neighbours[i].toVector())){
-                cout << "Test11666667777777\n";
                 vector <SchiebePuzzle> newPath = aktuellerPfad;
                 newPath.push_back(neighbours [i]);
                 queue.emplace(newPath, neighbours [i]);
                 visited.emplace(neighbours [i].toVector(), 0);
-            }
-            else {
-                cout << "Test1\n";
             }
         }
     }
